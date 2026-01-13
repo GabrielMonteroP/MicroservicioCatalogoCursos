@@ -3,6 +3,7 @@ package cl.xino.catalogoCursos.controller;
 
 
 import cl.xino.catalogoCursos.models.entities.Curso;
+import cl.xino.catalogoCursos.models.requests.CursoRequest;
 import cl.xino.catalogoCursos.services.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,21 @@ public class CursoController {
 
     // POST: Crear curso
     @PostMapping
-    public Curso crearCurso(@RequestBody Curso curso) {
-        return cursoService.guardarCurso(curso);
+    public ResponseEntity<Curso> crearCurso(@RequestBody CursoRequest request){
+        Curso cursoNuevo = new Curso();
+
+        cursoNuevo.setTitulo(request.getTitulo());
+        cursoNuevo.setDescripcion(request.getDescripcion());
+        cursoNuevo.setCategoria(request.getCategoria());
+        cursoNuevo.setPrecio(request.getPrecio());
+        cursoNuevo.setInstructorId(request.getInstructorId());
+        cursoNuevo.setFechaInicio(request.getFechaInicio());
+        cursoNuevo.setFechaFin(request.getFechaFin());
+
+        Curso cursoGuardado = cursoService.guardarCurso(cursoNuevo);
+        return ResponseEntity.ok(cursoGuardado);
+
+
     }
 
     // DELETE: Eliminar curso
