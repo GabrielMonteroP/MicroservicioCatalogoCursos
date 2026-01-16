@@ -3,6 +3,7 @@ package cl.xino.catalogoCursos.controller;
 
 
 import cl.xino.catalogoCursos.models.entities.Curso;
+import cl.xino.catalogoCursos.models.requests.CursoCompletoRequest;
 import cl.xino.catalogoCursos.models.requests.CursoRequest;
 import cl.xino.catalogoCursos.services.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,17 @@ public class CursoController {
     public ResponseEntity<Void> eliminarCurso(@PathVariable Long id) {
         cursoService.eliminarCurso(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/completo/{id}")
+    public ResponseEntity<?> obtenerCursoCompleto(@PathVariable Long id) {
+        try {
+            CursoCompletoRequest resultado = cursoService.obtenerCursoConContenidos(id);
+            return ResponseEntity.ok(resultado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error de comunicación: " + e.getMessage());
+        }
     }
 }
