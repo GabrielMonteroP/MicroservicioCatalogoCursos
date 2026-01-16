@@ -32,7 +32,6 @@ public class CursoService {
     }
 
     public Curso guardarCurso(Curso curso) {
-        // Aquí podrías validar que el precio no sea negativo, etc.
         return cursoRepository.save(curso);
     }
 

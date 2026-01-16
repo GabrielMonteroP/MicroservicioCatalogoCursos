@@ -6,8 +6,7 @@ import java.util.List;
 public class CursoCompletoRequest {
     private Curso curso;
     private List<ContenidoRequest> contenidos;
-
-    // Constructor, Getters y Setters
+    
     public CursoCompletoRequest(Curso curso, List<ContenidoRequest> contenidos) {
         this.curso = curso;
         this.contenidos = contenidos;

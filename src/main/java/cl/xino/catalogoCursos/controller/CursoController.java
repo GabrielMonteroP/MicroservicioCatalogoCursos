@@ -59,6 +59,8 @@ public class CursoController {
         return ResponseEntity.noContent().build();
     }
 
+
+    // GET: Obtener curso completo con contenidos
     @GetMapping("/completo/{id}")
     public ResponseEntity<?> obtenerCursoCompleto(@PathVariable Long id) {
         try {
